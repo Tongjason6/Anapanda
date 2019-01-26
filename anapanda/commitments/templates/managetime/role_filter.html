@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'kummithome' %}">Kummit</a></li>
+<li class="breadcrumb-item"><a href="{% url 'circle-list' %}">Circles</a></li>
+<li class="breadcrumb-item active">Roles</li>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-sm-8">
+      <br>
+      <h3>Statistics [NOTE: currently fake data]</h3>
+      <strong>Circle roles: 36</strong> <br>
+      - Energized: 34 <br>
+      - Unenergized: 2 <br>
+      - Fully defined: 30 <br>
+      - Not fully defined: 6 <br>
+      - Tasks completed: 50 <br>
+      - Kummitments achieved: 74 <br><br>
+
+    </p>
+
+    </div>
+
+    <div class="col-sm-4 border border-secondary py-2">
+        <h3>Filters</h3>
+        <form action="" method="get">
+            {% bootstrap_form filter.form %}
+            <input type="submit" />
+        </form>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <br />
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Role</th>
+        <th>Circle</th>
+        <th>Energizer(s)</th>
+        <th>Completed tasks</th>
+        <th>Overdue tasks</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for role in role_list %}
+        <div class="row">
+          <tr>
+            <td><a href="{{ role.get_absolute_url }}">{{ role.name }}</a></td>
+            <td>{{ role.circle }}</td>
+            <td>{{ role.energizers }}</td>
+            <td>[TODO]</td>
+            <td>[TODO]</td>
+          </tr>
+        </div>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% load bootstrap4 %}
+
+{% if form.non_field_errors %}
+  {% bootstrap_form_errors form %}
+{% endif %}
+
+{% for field in form %}
+  {% bootstrap_field field %}
+{% endfor %}

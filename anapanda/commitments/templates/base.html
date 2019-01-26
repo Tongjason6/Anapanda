@@ -1,0 +1,67 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Kummit: {% if user.is_authenticated %}{{ user.username }}{% endif %}{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
+    {% block stylesheet %}{% endblock %}
+  </head>
+  <body>
+    {% block body %}
+      <nav class="navbar navbar-expand-sm" style="background-color: #006F3A;">
+        <div class="container">
+          <ul class="nav navbar-nav">
+            <a class="navbar-brand" href="{% url 'home' %}" style="color: #FFFFFF;">Tunapanda Kummit</a>
+          </ul>
+          <ul class="nav navbar-nav w-50">
+            <div class="btn-group btn-group-sm" role="group" aria-label="Portal and Swag">
+              <a class="btn btn-primary" href="http://portal.tunapanda.org" target="_blank" role="button" style="background-color: #564840; border-color: #FFFFFF;">Portal</a>
+              <a class="btn btn-primary" target="_blank" href="http://xavierproject.tunapanda.org" role="button" style="background-color: #6FCF3F; border-color: #FFFFFF;">Swag</a>
+            </div>
+          </ul>
+          <ul class="nav navbar-nav">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mainMenu">
+            <li class="nav-item dropdown">
+                  {% if request.user.is_authenticated %}
+                  <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #FFFFFF;">
+                    {{ user.username }}
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+                    <a class="dropdown-item" href="#">My account</a>
+                    <a class="dropdown-item" href="#">Change password</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+                  </div>
+                  {% else %}
+                    <form class="form-inline ml-auto">
+                      <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log in</a>
+                      <a href="{% url 'signup' %}" class="btn btn-primary ml-2">Sign up</a>
+                    </form>
+                  {% endif %}
+                </li>
+              </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <ol class="breadcrumb my-4">
+          {% block breadcrumb %}
+          {% endblock %}
+        </ol>
+        {% block content %}
+        {% endblock %}
+      </div>
+    {% endblock body %}
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+    <script type="text/javascript"> $('.datepicker').datepicker(); </script>
+  </body>
+</html>

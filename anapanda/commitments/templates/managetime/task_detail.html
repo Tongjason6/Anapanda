@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'kummithome' %}">Kummit</a></li>
+<li class="breadcrumb-item"><a href="{% url 'task-list' %}">Tasks</a></li>
+<li class="breadcrumb-item active">View Task</li>
+{% endblock %}
+
+{% block content %}
+
+<h1>Task:  {{ task.subject }} <small>(not started)</small></h1>
+<p>Description:  {{ task.description }}</p>
+<p>Evidence of done:  {{ task.doneevidence }}</p>
+<p>Kummitor:  [none] </p>
+<p>Deadline:  {{ task.deadline }}</p>
+<p>Start:  {{ task.startdate }}</p>
+<p>Creator:  {{ task.created_by }} </p>
+{% if task.circle %} <p>Circle:  {{ task.circle }}</p> {% endif %}
+{% if task.role %} <p>Role:  {{ task.role }}</p> {% endif %}
+{% if task.project %} <p>Project:  {{ task.project }}</p> {% endif %}
+<p>Created:  {{ task.last_update }} </p>
+<p>Last edit:  {{ task.last_update }} </p>
+{% endblock %}

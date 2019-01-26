@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'kummithome' %}">Kummit</a></li>
+<li class="breadcrumb-item active">Circles</li>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-sm-8">
+      <br>
+      <h3>Statistics [currently fake data]</h3>
+      <strong>Circles: 5</strong> <br>
+      <strong>Trained by Tunapanda:</strong> 8 roles. 3 projects. Metrics up 9.3% MoM <br><br>
+      <strong>Produced by Tunapanda:</strong> 10 roles. 4 projects. Metrics up 8.0% MoM <br><br>
+      <strong>Powered by Tunapanda:</strong> 6 roles. 3 projects. Metrucs up 7.6% Mom <br><br>
+      <strong>Tunapanda Team:</strong> 7 roles. 3 project. Metrics up 7.7% MoM <br><br>
+      <strong>Anchor Circle:</strong> totally useless, what is it they even do here?? <br><br>
+      <strong></strong>
+
+
+    </p>
+
+    </div>
+{% comment %}
+     <div class="col-sm-4 border border-secondary py-2">
+        <h3>Filters</h3>
+        <form action="" method="get">
+            {{ filter.form|crispy }}
+            <input type="submit" />
+        </form>
+    </div>
+{% endcomment %}
+  </div>
+</div>
+
+<div class="container-fluid">
+  <br />
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Circle</th>
+        <th>Purpose</th>
+        <th>Lead Link</th>
+        <th>Latest Report</th>
+        <th>OKRs</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for circle in circle_list %}
+        <div class="row">
+          <tr>
+            <td><a href="{{ circle.get_absolute_url }}">{{ circle.name }}</a></td>
+            <td>{{ circle.purpose }}</td>
+            <td>{{ circle.leadlink }}</td>
+            <td>{{ circle.reports }}</td>
+            <td>{{ circle.metrics }}</td>
+          </tr>
+        </div>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% comment %}
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %} #}
+{% endcomment %}
+
+{% endblock %}

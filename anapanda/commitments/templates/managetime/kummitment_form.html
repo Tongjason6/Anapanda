@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'kummithome' %}">Kummit</a></li>
+<li class="breadcrumb-item"><a href="{% url 'kummitment-list' %}">Kummitments</a></li>
+<li class="breadcrumb-item active">Make Kummitment</li>
+{% endblock %}
+
+{% block content %}
+
+<div class="row w-50">
+  <div class="col-sm-12 col-md-12 col-lg-12">
+    <h3 class="text-center">"Define Kummitment"</h3>
+        {% if user.is_authenticated %}
+        <p>Kummitment by: {{ user.username }}<p>
+        {% else %}
+        <h2>Login, please</h2>
+        {% endif %}
+        <form method="POST">
+          {% csrf_token %}
+          <table border="1">
+            {% crispy form %}
+          </table>
+      </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'kummithome' %}">Kummit</a></li>
+<li class="breadcrumb-item"><a href="{% url 'circle-list' %}">Circles</a></li>
+<li class="breadcrumb-item"><a href="{% url 'role-list' %}">Roles</a></li>
+<li class="breadcrumb-item active">View Role</li>
+{% endblock %}
+
+{% block content %}
+
+<p>
+  <h1>Role:  <strong>{{ role.name }}</strong></h1>
+  {% if role.circle %} Circle:  <strong>{{ role.circle }}</strong> {% endif %} <br>
+  {% if role.project %} Project:  <strong>{{ role.project }}</strong> {% endif %}
+<br>
+
+</p>
+
+<p>
+  <h4>Leadership</h4>
+  <p><strong>Energizers:</strong>  {{ role.energizers }} <br>
+</p>
+
+<p>
+<h4>Strategy, Tactics, and Governance</h4>
+  <strong>Domains</strong> <br> {{ role.domains }} <br><br>
+  <strong>Accountabilities</strong><br>  {{ role.accountabilities }} <br><br>
+  <strong>Success Indicators</strong><br>  {{ role.successindicators }} <br><br>
+  {% if role.collaborators %}<strong>Collaborators</strong><br>  {{ role.collaborators }} <br> {% endif %}
+</p>
+
+<p>
+  <h4>OKRs</h4>
+  [Not required, but excellent additions for top-performing Role energizers]
+</p>
+
+<p>
+  <h4>Reports</h4>
+  <p>Role reports are to be filed at hand-off (whenever someone leaves a role) and as often as required by the Circle.</p>
+  <strong>Latest report</strong><br>
+  {{ role.reports }}<br><br>
+  <strong>Archives</strong><br>
+  {{ role.reports }}
+</p>
+
+<p>
+  <h4>Role Biography:</h4>
+  <strong>Birthdate:</strong> {{ role.birthdate }} <br>
+  <strong>Creator(s):</strong> {{ role.creator }} <br>
+  <strong>Status:</strong>  {{ role.status }} <br>
+  <strong>Last update:</strong> {{ role.last_updated }}
+
+</p>
+<hr><br>
+<h3>Tasks</h3>
+Overdue: <br>
+In progress: <br>
+Upcoming: <br>
+Completed: <br>
+<br>
+<h3>Kummitments</h3>
+Overdue: <br>
+In progress: <br>
+Upcoming: <br>
+Completed: <br>
+{% endblock %}

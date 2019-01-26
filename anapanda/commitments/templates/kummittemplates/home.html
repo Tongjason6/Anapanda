@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Circles</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Circle</th>
+        <th>Purpose</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for circle in circles %}
+        <tr>
+          <td>
+            {{ circle.name }}<br>
+            <small style="color: #888">Lead:  {{ circle.leadlink }}</small>
+          </td>
+          <td>
+            {{ circle.purpose }}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

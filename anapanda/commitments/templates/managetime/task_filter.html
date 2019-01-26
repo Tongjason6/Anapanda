@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'kummithome' %}">Kummit</a></li>
+<li class="breadcrumb-item active">Task List</li>
+{% endblock %}
+
+{% block content %}
+<h1>Tunapanda Tasks</h1>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-sm-8">
+      <br>
+      <h3>Statistics</h3>
+      <strong>Tasks: 175</strong> <br>
+      - Completed: 92 <br>
+      - Past deadline: 13 <br>
+      - Past kummitment: 8 <br>
+      - In progress: 37 <br>
+      - Not started: 25 <br><br>
+      <strong>Projects: 12</strong><br>
+      - Project roles: 23
+      <br><br>
+      <p><strong>Circles: 5 </strong><br>
+      - Circle roles: 36 <br>
+      - Circle reports: 4
+      <strong></strong>
+
+
+    </p>
+
+    </div>
+
+    <div class="col-sm-4 border border-secondary py-2">
+        <h3>Filters</h3>
+        <form action="" method="get">
+            {% bootstrap_form filter.form %}
+            <input type="submit" />
+        </form>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <br />
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Description</th>
+        <th>Deadline</th>
+        <th>Creator</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in task_list %}
+        <div class="row">
+          <tr>
+            <td><a href="{{ task.get_absolute_url }}">{{ task.subject }}</a></td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.deadline }}</td>
+            <td>{{ task.created_by }}</td>
+          </tr>
+        </div>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+{% endblock %}

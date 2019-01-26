@@ -1,0 +1,29 @@
+.navbar-brand {
+  font-family: 'PT Sans', cursive;
+}
+
+.breadcrumb >.active {
+   color: #6FCF3F;
+}
+
+.breadcrumb a {
+   color: #FFFFFF;
+}
+
+.breadcrumb {
+  background-color: #006F3A;
+}
+
+.breadcrumb > li + li:before {
+    color: #564840 !important;
+}
+
+h1, h2, h3, h4 {
+  color: #006F3A;
+}
+
+blockquote p {
+    font-family: Verdana;
+    font-size: 14px;
+    color: #564840;
+}

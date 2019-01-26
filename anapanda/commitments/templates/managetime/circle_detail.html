@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'kummithome' %}">Kummit</a></li>
+<li class="breadcrumb-item"><a href="{% url 'circle-list' %}">Circles</a></li>
+<li class="breadcrumb-item active">View Circle</li>
+{% endblock %}
+
+{% block content %}
+
+<p>
+  <h1>Circle:  {{ circle.name }} </h1>
+  <strong>Purpose:</strong>  {{ circle.purpose }} <br><br>
+  {% if circle.supercircle %} <strong>Super-Circle:</strong> {{ circle.supercircle }} {% endif %} <br>
+  {% if circle.self == "Powered by Tunapanda" %}<a href="http://127.0.0.1:8000/kummit/roles/?energizers=&circle=Powered+by+Tunapanda&project=&rolestatus=">Roles</a>{% endif %}
+</p>
+
+<p>
+  <h4>Circle Leadership</h4>
+  <p><strong>Lead Link:</strong>  {{ circle.leadlink }} <br>
+  <strong>Secretary:</strong>  {{ circle.secretary }} <br>
+  <strong>Rep Link:</strong>  {{ circle.replink }} <br>
+  <strong>Facilitator:</strong>  {{ circle.facilitator }} <br>
+  {% if circle.crosslinks %} <strong>Cross link(s):</strong> {{ circle.crosslinks }}{% endif%} <br>
+<br>
+  <strong>Role Leadership</strong> <br>
+  <small>[NOTE: this is Trained by Tunapanda's data, I'm still working on automatically getting it for each circle. -Jay]</small> <br>
+  Maureen: 4 <br>
+  Dennis: 3 <br>
+  Oruko: 3 <br>
+  Brian: 2 <br>
+  Mohammed: 2 <br>
+  Melkizedek: 2 <br>
+  Onyango: 2 <br>
+  Tong: 2 <br>
+  Jacky: 1 <br>
+  Mandela: 1 <br>
+
+</p>
+
+<p>
+<h4>Strategy & Governance</h4>
+  <strong>Strategies</strong><br>  {{ circle.strategies }} <br><br>
+  <strong>Domains</strong><br>  {{ circle.domains }} <br><br>
+  <strong>Policies</strong><br>  {{ circle.policies }} <br><br>
+  <strong>Accountabilities</strong><br>  {{ circle.accountabilities }} <br><br>
+</p>
+
+<p>
+  <h4>OKRs</h4>
+  <strong>Objectives</strong><br> {{ circle.objectives }} <br><br>
+  <strong>Key Results (metrics)</strong><br> {{ circle.metrics }} <br>
+</p>
+
+<p>
+  <h4>Reports</h4>
+  <strong>Latest report</strong><br>
+  {{ circle.reports }}<br><br>
+  <strong>Archives</strong><br>
+  {{ circle.reports }}
+</p>
+
+<p>
+  <h4>Circle Biography:</h4>
+  <strong>Birthdate:</strong> {{ circle.birthdate }}
+  <strong>Last updated:</strong> {{ circle.last_updated }}
+</p>
+<br><br>
+TODO: Show roles & projects
+
+{% endblock %}

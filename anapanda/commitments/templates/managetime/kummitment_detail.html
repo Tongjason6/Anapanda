@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'kummithome' %}">Kummit</a></li>
+<li class="breadcrumb-item"><a href="{% url 'kummitment-list' %}">Kummitments</a></li>
+<li class="breadcrumb-item active">View Kummitment</li>
+{% endblock %}
+
+{% block content %}
+
+<h2>Task</h2>
+<div class="border">
+  <h4><a href="{% url 'task-detail' kummitment.task.id %}">{{ kummitment.task.subject }}</a> <small>(kummittor: {{ kummitment.kummitor }}) </small></h4>
+  <p>
+    Success actions:  {{ kummitment.task.successactions }} <br>
+    Evidence of done:  {{ kummitment.task.doneevidence }} <br>
+    Deadline:  {{ kummitment.task.deadline }}</p>
+    {% if task.circle %} <p>Circle:  {{ kummitment.task.circle }}</p> {% endif %}
+    {% if task.role %} <p>Role:  {{ kummitment.task.role }}</p> {% endif %}
+    {% if task.project %} <p>Project:  {{ kummitment.task.project }}</p> {% endif %}
+  <p style="font-size: 50%;">Creator:  {{ kummitment.task.created_by }} * Created: {{ kummitment.task.last_update }} * Start:  {{ kummitment.task.startdate }} * Last edit:  {{ kummitment.task.last_update }}</p>
+</div> <br>
+
+<h2>Kummitment</h2>
+<div class="border">
+  <h4><a href="{% url 'kummitment-detail' kummitment.id %}">{{ kummitment.successactions }}</a></h4>
+  {% if kummitment.needhelp %} <strong>Assistance requested.</strong> <em>"{{ kummitment.problemneedinghelp }}"</em>
+  {% else %} <em><small>No assistance requested to date.</small></em>
+  {% endif %} <br> <br>
+  <p>
+    Kummitor: {{ kummitment.kummitor }} <br>
+    Kummitment deadline: {{ kummitment.deadline }} <br>
+    Next action: {{ kummitment.nextaction }} <br> <br>
+    Possible obstacles: {{ kummitment.possibleobstacles }} <br>
+    Time estimate (minutes): {{ kummitment.minutesestimate }} <br> <br>
+    Status (not started, in progress, submitted for completeness confirmation, complete): <strong>{{ kummitment.status }}</strong> <br> <br>
+    SMART: Specific? <strong>{{ kummitment.specific }}</strong> Measurable? <strong>{{ kummitment.measurable }}</strong> Achievable? <strong>{{ kummitment.achievable }}</strong> Relvant? <strong>{{ kummitment.relevant }}</strong> Time bound? <strong>{{ kummitment.timebound }}</strong> <br>
+  </p>
+  <h4>Member Growth</h4>
+  {% if kummitment.healthy %} <strong>Healthy</strong> <br> {{ kummitment.healthy }} <br> {% endif %}
+  {% if kummitment.wealthy %} <strong>Wealthy</strong> <br> {{ kummitment.wealthy }} <br> {% endif %}
+  {% if kummitment.wise %} <strong>Wise</strong> <br> {{ kummitment.wise }} <br> {% endif %}
+  {% if kummitment.connected %} <strong>Connected</strong> <br> {{ kummitment.connected }} <br> {% endif %} <br>
+</div>
+
+{% endblock %}

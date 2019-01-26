@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'kummithome' %}">Kummit</a></li>
+<li class="breadcrumb-item"><a href="{% url 'task-list' %}">Tasks</a></li>
+<li class="breadcrumb-item active">Create Task</li>
+{% endblock %}
+
+{% block content %}
+
+<div class="row w-50">
+  <div class="col-sm-12 col-md-12 col-lg-12">
+    <h3 class="text-center">"Define Task"</h3>
+        {% if user.is_authenticated %}
+          <p>Task by: {{ user.username }}<p>
+        {% else %}
+          <h2>Login, please</h2>
+        {% endif %}
+
+        <form method="POST">{% csrf_token %}
+          <table border="1">
+            {% bootstrap_form form %}
+          </table>
+        </form>
+  </div>
+</div>
+
+{% endblock %}
